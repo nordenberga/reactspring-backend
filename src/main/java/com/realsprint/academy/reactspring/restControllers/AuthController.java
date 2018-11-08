@@ -1,10 +1,9 @@
-package com.realsprint.academy.reactspring.controllers;
+package com.realsprint.academy.reactspring.restControllers;
 
 import com.realsprint.academy.reactspring.models.LoginResponse;
 import com.realsprint.academy.reactspring.models.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;

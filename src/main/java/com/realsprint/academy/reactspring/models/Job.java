@@ -1,14 +1,13 @@
 package com.realsprint.academy.reactspring.models;
 
-import javax.persistence.Entity;
-
-@Entity
 public class Job {
 
-    
     private long jobId;
 
+
     private String location;
+
+
     private String title;
     private String gitId;
 
