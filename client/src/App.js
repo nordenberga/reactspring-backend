@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 
 class App extends Component {
+
+  state = {
+    showModal: false
+};
+
+showTheModal = () => {
+    this.setState({showModal:true})
+};
+
+hideModal = () => {
+    this.setState({showModal:false})
+
+};
+
+
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
+        <img src={logo} alt=""/>
+        <h1>Apply for a new job today</h1>
+          <p onClick={this.showTheModal} className="enticingText">
+            Login
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+      {/*    <LoginModal isOpen={this.state.showModal} onClose={this.hideModal}/>*/} 
         </header>
       </div>
     );

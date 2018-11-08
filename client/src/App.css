@@ -7,6 +7,9 @@
   height: 40vmin;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Asap');
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -16,6 +19,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+body {
+  font-family: 'Asap', sans-serif;
 }
 
 .App-link {
@@ -29,4 +36,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+.enticingText {
+  color: red;
+}
+
+.enticingText:hover {
+  color:green;
+  cursor: pointer;
 }
