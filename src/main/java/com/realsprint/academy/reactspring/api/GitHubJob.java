@@ -21,8 +21,11 @@ public class GitHubJob {
     private String companyLogo;
     private String url;
 
+    public GitHubJob() {
+    }
+
     public GitHubJob(String id, String createdAt, String title, String location, String type, String description,
-                          String howToApply, String company, String companyUrl, String companyLogo, String url) {
+                     String howToApply, String company, String companyUrl, String companyLogo, String url) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
@@ -44,10 +47,11 @@ public class GitHubJob {
         this.id = id;
     }
 
+    @JsonProperty("created_at")
     public String getCreatedAt() {
         return createdAt;
     }
-
+    @JsonProperty("created_at")
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
@@ -84,10 +88,12 @@ public class GitHubJob {
         this.description = description;
     }
 
+    @JsonProperty("how_to_apply")
     public String getHowToApply() {
         return howToApply;
     }
 
+    @JsonProperty("how_to_apply")
     public void setHowToApply(String howToApply) {
         this.howToApply = howToApply;
     }
@@ -100,18 +106,22 @@ public class GitHubJob {
         this.company = company;
     }
 
+    @JsonProperty("company_url")
     public String getCompanyUrl() {
         return companyUrl;
     }
 
+    @JsonProperty("company_url")
     public void setCompanyUrl(String companyUrl) {
         this.companyUrl = companyUrl;
     }
 
+    @JsonProperty("company_logo")
     public String getCompanyLogo() {
         return companyLogo;
     }
 
+    @JsonProperty("company_logo")
     public void setCompanyLogo(String companyLogo) {
         this.companyLogo = companyLogo;
     }
