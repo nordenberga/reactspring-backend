@@ -7,12 +7,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+
+@Entity
+@Table(name = "user")
 public class UserEntity {
-
-
-    @Entity
-    @Table(name = "user")
-    public class User {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,8 +24,8 @@ public class UserEntity {
         @Column(name = "password")
         private String password;
 
-        @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-        private List<Job> jobApplicationList;
+       /* @OneToMany(mappedBy="id", cascade = CascadeType.ALL)
+        private List<JobEntity> jobApplicationList;*/
     }
 
-}
+

@@ -5,12 +5,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
+@Entity
+@Table(name = "job")
 public class JobEntity {
-
-
-    @Entity
-    @Table(name = "job")
-    public class Job {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +21,5 @@ public class JobEntity {
         private String title;
         private String gitId;
 
-    }
 
 }
