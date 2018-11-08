@@ -14,9 +14,8 @@ class LoginModal extends Component {
     };
 
     attemptLogin = () => {
-
-    }
-    ;
+        Document.getElementById("passInput").value = "";
+    };
 
     handleUsernameWriter = (event) => {
         this.setState({userNameInput: event.target.value})
