@@ -6,15 +6,57 @@ import PropTypes from "prop-types";
 class LoggedInLandingPage extends Component {
     state = {
         username: "placeholder",
-        featuredJobs: [{title: "mäklare sökes", description: "Hej vi söker mäklare som kan sälja hus i stockholm"},
-            {title: "trädgårdsmästare", description: "måste veta hur man vattnar och klipper gräs, bra arbetstider."},
-            {title: "kattvakt", description: "behöver någon som kan ta hand om mina katter medan jag är på jobbet. betalning enligt avtal"},
-            {title: "målare", description: "måns måleri söker målare som kan måla. vi erbjuder bra lön och spännande arbetsuppgifter. söker någon med minst 1 års erfarenhet av måleri"}]
+        searchText: "",
+        searchedJobs: [],
+        featuredJobs: []
     };
 
+
+    componentDidMount() {
+        fetch('http://localhost:8080/search/java', {
+            method: 'get',
+            headers: {'Content-Type':'application/json'}
+            })
+            .then(response => 
+                response.json().then(data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then(res => {
+                this.setState({featuredJobs: res.data})
+            }));
+    }
+
     renderFeaturedJobs = () => {
-        return (this.state.featuredJobs.map(job => <FeaturedJobSingle title={job['title']} description={job['description']}/>));
+        return (this.state.featuredJobs.map(job => <FeaturedJobSingle title={job['title']} description={job['location']}/>));
     };
+
+
+    changeSearchString = (event) => {
+        this.setState({searchText: event.target.value})
+    }
+
+    searchJobs = () => {
+        fetch('http://localhost:8080/search/' + this.state.searchText, {
+            method: 'get',
+            headers: {'Content-Type':'application/json'}
+            })
+            .then(response => 
+                response.json().then(data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then(res => {
+                this.setState({searchedJobs: res.data})
+            }));
+    }
+
+    handleKeyPress(target) {
+        if(target.charCode==13){
+            this.searchJobs()     
+        }
+    
+    }
 
     render() {
         return (
@@ -27,7 +69,14 @@ class LoggedInLandingPage extends Component {
                 </div>
                 <div className="searchJobsDiv">
                     <b className="searchJobsTitle">Sök jobb: </b>
-                    <input type="text"/><button>sök</button>
+                    <input type="text" onChange={this.changeSearchString}  onKeyPress={event => {
+                    if (event.key === 'Enter') {
+                        this.searchJobs();
+                    }}}/><button onClick={this.searchJobs}>Sök</button>
+                    {this.state.searchedJobs.map(function(job) {
+   return <li key={job.id}>{job.title} in {job.location}</li>
+   
+})}
                 </div>
             </div>
         )
