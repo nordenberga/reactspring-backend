@@ -11,22 +11,26 @@ class LoginModal extends Component {
     state = {
         userNameInput: "",
         passwordInput: "",
-        errorEncountered: false
+        errorEncountered: false,
+        data: []
     };
 
     attemptLogin = () => {
         fetch('http://localhost:8080/login', {
             method: 'post',
             headers: {'Content-Type':'application/json'},
-            body: {
+            body:JSON.stringify( {
                 "username":this.state.userNameInput,
                 "password": this.state.passwordInput,   
-            }})
-            .then(v => {
-                {/*if(v.redirected) window.location = v.url*/}
-                console.log("Success!")
-            })
-            .catch(e => console.warn("Fel :("))
+            })})
+            .then(response => 
+                response.json().then(data => ({
+                    data: data,
+                    status: response.status
+                })
+            ).then(res => {
+                 console.log(res.data)
+            }));
     }
    
 
@@ -51,8 +55,8 @@ class LoginModal extends Component {
                     <hr/>
                     {this.state.errorEncountered && <div>Login misslyckades</div>}
                     <span className="MainLoginSpan">
-                        <p>Användarnamn:</p><input type="text" className="loginput" id="nameInput" onClick={this.handleUsernameWriter}/><br/>
-                        <p>Lösenord:</p><input type="password" className="loginput" id="passInput" onClick={this.handlePasswordWriter}/><br/>
+                        <p>Användarnamn:</p><input type="text" className="loginput" id="nameInput" onChange={this.handleUsernameWriter}/><br/>
+                        <p>Lösenord:</p><input type="password" className="loginput" id="passInput" onChange={this.handlePasswordWriter}/><br/>
                         <button className="loginModalButton" onClick={this.attemptLogin}>Logga In</button><button className="abortModalButton" onClick={this.props.onClose}>Avbryt</button>
                     </span>
                 </div></Fragment> }
