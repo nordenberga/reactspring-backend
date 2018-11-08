@@ -29,13 +29,10 @@ class LoginModal extends Component {
                     status: response.status
                 })
             ).then(res => {
+
                  console.log(res.data)
             }));
-    }
-   
-
-
-
+    };
 
 
     handleUsernameWriter = (event) => {
