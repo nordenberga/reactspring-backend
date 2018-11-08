@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.png';
 import './App.css';
+import LoginModal from "./LoginModal.js";
 
 class App extends Component {
 
@@ -28,7 +29,7 @@ hideModal = () => {
           <p onClick={this.showTheModal} className="enticingText">
             Login
           </p>
-      {/*    <LoginModal isOpen={this.state.showModal} onClose={this.hideModal}/>*/} 
+      {   this.state.showModal && <LoginModal isOpen={this.state.showModal} onClose={this.hideModal}/>}
         </header>
       </div>
     );
