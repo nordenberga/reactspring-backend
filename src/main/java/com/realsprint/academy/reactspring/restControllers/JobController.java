@@ -13,12 +13,13 @@ import java.util.List;
 @RestController
 public class JobController {
 
+    @Autowired
     private JobService jobService;
-
+/*
     @Autowired
     public JobController (JobService jobService){
         this.jobService = jobService;
-    }
+    }*/
 
     @RequestMapping("/jobs")
     public List<String> getAllJobs(){
