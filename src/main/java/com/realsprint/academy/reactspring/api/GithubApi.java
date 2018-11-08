@@ -43,6 +43,6 @@ public class GithubApi {
     }
 
     private Job parseGitHubJob(GitHubJob gitHubJob) {
-        return new Job(gitHubJob.getLocation(), gitHubJob.getTitle(), gitHubJob.getId());
+        return new Job(gitHubJob.getId(), gitHubJob.getLocation(), gitHubJob.getTitle());
     }
 }
