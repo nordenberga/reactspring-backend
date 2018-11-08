@@ -59,7 +59,6 @@ class LoginModal extends Component {
                         <p>Lösenord:</p><input type="password" className="loginput" id="passInput" onChange={this.handlePasswordWriter}/><br/>
                         <button className="loginModalButton" onClick={this.attemptLogin}>Logga In</button><button className="abortModalButton" onClick={this.props.onClose}>Avbryt</button>
                     </span>
-
                 </div></Fragment> }
             </Fragment>
         );
