@@ -1,4 +1,4 @@
-package com.realsprint.academy.reactspring.restControllers;
+package com.realsprint.academy.reactspring.Controllers;
 
 import com.realsprint.academy.reactspring.models.LoginResponse;
 import com.realsprint.academy.reactspring.models.User;
