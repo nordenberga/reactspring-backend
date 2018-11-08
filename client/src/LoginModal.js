@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 
 class LoginModal extends Component {
     static propTypes = {
-        closeFunction: PropTypes.func.isRequired
+        onClose: PropTypes.func.isRequired,
+        isOpen: PropTypes.bool.isRequired,
     };
 
     state = {
@@ -14,7 +15,7 @@ class LoginModal extends Component {
     };
 
     attemptLogin = () => {
-        Document.getElementById("passInput").value = "";
+        document.getElementById("passInput").value = "";
     };
 
     handleUsernameWriter = (event) => {
@@ -28,18 +29,18 @@ class LoginModal extends Component {
     render () {
         return (
             <Fragment>
-                <div className="darkenedBackground"></div>
+                {this.props.isOpen && <Fragment><div className="darkenedBackground"></div>
                 <div className="loginModal">
                     <h3>Logga In</h3>
                     <hr/>
                     {this.state.errorEncountered && <div>Login misslyckades</div>}
                     <span className="MainLoginSpan">
-                        <b>Användarnamn:</b><input type="text" className="loginput" id="nameInput" onClick={this.handleUsernameWriter}/><br/>
-                        <b>Lösenord:</b><input type="text" className="loginput" id="passInput" onClick={this.handlePasswordWriter}/><br/>
-                        <button className="loginModalButton" onClick={this.attemptLogin}>Logga In</button><button className="loginModalButton" onClick={this.props.closeFunction}>Avbryt</button>
+                        <p>Användarnamn:</p><input type="text" className="loginput" id="nameInput" onClick={this.handleUsernameWriter}/><br/>
+                        <p>Lösenord:</p><input type="password" className="loginput" id="passInput" onClick={this.handlePasswordWriter}/><br/>
+                        <button className="loginModalButton" onClick={this.attemptLogin}>Logga In</button><button className="loginModalButton" onClick={this.props.onClose}>Avbryt</button>
                     </span>
 
-                </div>
+                </div></Fragment> }
             </Fragment>
         )
     }
