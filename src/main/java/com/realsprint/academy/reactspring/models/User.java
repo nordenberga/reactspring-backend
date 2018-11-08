@@ -3,6 +3,7 @@ package com.realsprint.academy.reactspring.models;
 
 public class User {
 
+
     private long id;
 
     private String username;
