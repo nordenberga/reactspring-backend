@@ -1,4 +1,4 @@
-package com.realsprint.academy.reactspring.controllers;
+package com.realsprint.academy.reactspring.restControllers;
 
 import com.realsprint.academy.reactspring.models.User;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public class JobService {
 
+
     public List<String> getAllJobs(){
         return new ArrayList<>(
                 Arrays.asList("first job", "second job", "third job"));
