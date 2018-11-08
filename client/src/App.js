@@ -29,7 +29,7 @@ hideModal = () => {
           <p onClick={this.showTheModal} className="enticingText">
             Login
           </p>
-      {   this.state.showModal && <LoginModal isOpen={this.state.showModal} onClose={this.hideModal}/>}
+      {   this.state.showModal && <LoginModal className="loginmodal" isOpen={this.state.showModal} onClose={this.hideModal}/>}
         </header>
       </div>
     );
