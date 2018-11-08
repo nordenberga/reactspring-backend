@@ -1,5 +1,8 @@
 package com.realsprint.academy.reactspring.models;
 
+import javax.persistence.Entity;
+
+@Entity
 public class User {
     private long id;
     private String username;
