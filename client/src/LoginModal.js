@@ -15,8 +15,24 @@ class LoginModal extends Component {
     };
 
     attemptLogin = () => {
-        document.getElementById("passInput").value = "";
-    };
+        fetch('http://localhost:8080/login', {
+            method: 'post',
+            headers: {'Content-Type':'application/json'},
+            body: {
+                "username":this.state.userNameInput,
+                "password": this.state.passwordInput,   
+            }})
+            .then(v => {
+                {/*if(v.redirected) window.location = v.url*/}
+                console.log("Success!")
+            })
+            .catch(e => console.warn("Fel :("))
+    }
+   
+
+
+
+
 
     handleUsernameWriter = (event) => {
         this.setState({userNameInput: event.target.value})
@@ -42,7 +58,7 @@ class LoginModal extends Component {
 
                 </div></Fragment> }
             </Fragment>
-        )
+        );
     }
 }
 
