@@ -35,4 +35,8 @@ public class GithubApi {
 
         return null;
     }
+
+    private Job parseGitHubJob(GitHubJob gitHubJob){
+        return new Job(100, gitHubJob.getLocation(), gitHubJob.getTitle(), gitHubJob.getId());
+    }
 }
