@@ -77,3 +77,41 @@ noScrollBody {
   color:green;
   cursor: pointer;
 }
+
+.loginModal {
+  border-radius: 15px;
+  background-color: gray;
+  height: 350px;
+}
+
+.loginModal p {
+  font-size: 0.75em;
+}
+
+.loginModal button {
+  margin: 5px;
+  border-radius: 10px;
+  background-color: darkgray;
+}
+
+.abortModalButton:hover {
+  background-color: red;
+}
+
+.loginModalButton:hover {
+  background-color: green;
+}
+
+.loginModal input{
+  border-radius: 10px;
+}
+
+.loginModal input:focus{
+  outline: 0px solid orange;  
+  box-shadow: 0 0 0 3pt orange;
+  border: none;
+  color: transparent;
+  text-shadow: 0 0 0 gray;
+  padding: 3px;
+  padding-left: 8px;
+}
