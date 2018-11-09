@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-
+@RequestMapping("/users")
 public class UserController {
 
 
@@ -26,16 +26,19 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/adduser", method = {RequestMethod.POST})//, produces={MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @RequestMapping(value = "/adduser", method = {RequestMethod.POST})
     public ResponseEntity<User> update(@RequestBody User user) {
-
         if (user != null) {
             userService.addUser(user);
-
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
 
+   @RequestMapping("/name/{username}")
+    public UserEntity getUserByName(@PathVariable("name") String username) {
+        return userService.findUserByName(username);
+
+    }
 
 }

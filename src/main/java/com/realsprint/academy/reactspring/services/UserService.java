@@ -6,12 +6,11 @@ import com.realsprint.academy.reactspring.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
 public class UserService {
-
 
     UserRepository userRepo;
 
@@ -27,6 +26,10 @@ public class UserService {
 
     public UserEntity findUserById(Long id) {
         return userRepo.getOne(id);
+    }
+
+    public UserEntity findUserByName(String name) {
+        return userRepo.findByUsername(name);
     }
 
     public void addUser(User user) {
