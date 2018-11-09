@@ -16,9 +16,12 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    private UserService userService;
 
     @Autowired
-    UserService userService;
+    public UserController (UserService userService){
+        this.userService = userService;
+    }
 
     @GetMapping("/allusers")
     public List<UserEntity> getAllUsers() {
@@ -28,12 +31,18 @@ public class UserController {
 
     @RequestMapping(value = "/adduser", method = {RequestMethod.POST})
     public ResponseEntity<User> update(@RequestBody User user) {
+        boolean userAdded = false;
         if (user != null) {
-            userService.addUser(user);
+            userAdded = userService.addUser(user);
         }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
-    }
 
+        if(userAdded){
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+        }
+
+    }
 
    @RequestMapping("/name/{username}")
     public UserEntity getUserByName(@PathVariable("name") String username) {
