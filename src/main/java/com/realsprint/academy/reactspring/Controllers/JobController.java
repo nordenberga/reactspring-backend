@@ -12,17 +12,31 @@ import java.util.List;
 @RestController
 public class JobController {
 
-    @Autowired
     private JobService jobService;
-/*
+
     @Autowired
     public JobController (JobService jobService){
         this.jobService = jobService;
-    }*/
+    }
 
     @RequestMapping("/jobs")
     public List<Job> getAllJobs(){
         return jobService.getAllJobs();
+    }
+
+    @RequestMapping("/job/id/{gitId}")
+    public Job getByGitId(@PathVariable("gitId") String gitId){
+        return jobService.findById(gitId);
+    }
+
+    @RequestMapping("/jobs/company/{company}")
+    public List<Job> getByCompanyName(@PathVariable("company") String company){
+        return jobService.findByCompany(company);
+    }
+
+    @RequestMapping("/jobs/title/{title}")
+    public List<Job> getByTitle(@PathVariable("title") String title){
+        return jobService.findByTitle(title);
     }
 
     @RequestMapping("/search/{query}")
