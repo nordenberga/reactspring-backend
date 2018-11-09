@@ -46,7 +46,11 @@ class SignUpPage extends Component {
                     )
                 }).then(response => response.json())
                 .then(json => {   //should check if response is OK and if so, setState to userLoginSuccessful: true
-                        console.log(json);
+                    if (json.success === true) {
+                        this.setState({userLoginSuccessful: true});
+                        window.localStorage.setItem('token_jobs', json.message);
+                        window.localStorage.setItem('username_jobs', this.state.userNameInput)
+                    }
                     }
                 )
 
