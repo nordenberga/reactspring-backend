@@ -12,13 +12,12 @@ import java.util.List;
 @Service
 public class UserService {
 
-    UserRepository userRepo;
+    private UserRepository userRepo;
 
     @Autowired
     public UserService(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
-
 
     public List<UserEntity> findAllUsers() {
         return userRepo.findAll();
@@ -32,14 +31,16 @@ public class UserService {
         return userRepo.findByUsername(name);
     }
 
-    public void addUser(User user) {
-
-        UserEntity newUser= new UserEntity();
+    public boolean addUser(User user) {
+        if(findUserByName(user.getUsername()) != null){
+            return false;
+        }
+        UserEntity newUser = new UserEntity();
 
         newUser.setUsername(user.getUsername());
         newUser.setPassword(user.getPassword());
         userRepo.save(newUser);
-
+        return true;
     }
 
 }
