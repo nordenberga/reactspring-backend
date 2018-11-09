@@ -13,7 +13,7 @@ class LoggedInLandingPage extends Component {
 
 
     componentDidMount() {
-        fetch('http://localhost:8080/search/java', {
+        fetch('http://localhost:8080/jobs/sample', {
             method: 'get',
             headers: {'Content-Type':'application/json'}
             })
@@ -64,7 +64,7 @@ class LoggedInLandingPage extends Component {
     render() {
         return (
             <div className="landingDiv">
-                <h1 className="centeredHeader">Välkommen {this.state.userNameToRender}!</h1>
+                <h1 className="centeredHeader">Välkommen till JobApplier &trade; &reg;!</h1>
                 <hr/>
                 <div className="featuredJobsDiv">
                     <b className="featuredJobsTitle">Utvalda jobb: </b>
