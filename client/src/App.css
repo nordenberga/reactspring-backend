@@ -158,3 +158,22 @@ button {
 .searchJobsDiv button:hover {
  background-color: green;
 }
+
+.landingDiv {
+  text-align: center;
+}
+
+.clickableHeader:hover {
+  cursor: pointer;
+}
+
+.jobview {
+  box-shadow: 0 4px 8px 0 whitesmoke;
+  transition: 0.3s;
+  padding: 5px;
+  margin-top:5px;
+}
+
+.jobview:hover {
+  box-shadow: 0 8px 16px 0 whitesmoke;
+}
