@@ -34,6 +34,11 @@ public class JobController {
         return jobService.findByCompany(company);
     }
 
+    @RequestMapping("jobs/sample")
+    public List<Job> getSampleOfJobs(){
+        return jobService.getSampleJobs();
+    }
+
     @RequestMapping("/jobs/title/{title}")
     public List<Job> getByTitle(@PathVariable("title") String title){
         return jobService.findByTitle(title);

@@ -14,4 +14,6 @@ public interface JobRepository extends JpaRepository<JobEntity,Long > {
     List<JobEntity> findAllByTitle(String title);
 
     JobEntity findByGitId(String id);
+
+    List<JobEntity> findFirst10ByCreatedAtIsNotNull();
 }

@@ -46,6 +46,11 @@ public class JobService {
         return convertJobs(results);
     }
 
+    public List<Job> getSampleJobs(){
+        List<JobEntity> results = jobRepository.findFirst10ByCreatedAtIsNotNull();
+        return convertJobs(results);
+    }
+
     public Job findById(String id){
         return convertJobEntity(jobRepository.findByGitId(id));
     }

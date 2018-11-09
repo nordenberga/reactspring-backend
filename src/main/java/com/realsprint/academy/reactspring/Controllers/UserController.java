@@ -7,8 +7,6 @@ import com.realsprint.academy.reactspring.services.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -57,10 +55,8 @@ public class UserController {
         Date issuedAt = new Date();
         Date expireAt = new Date(issuedAt.getTime() + TimeUnit.DAYS.toMillis(1));
 
-        String jwtToken = Jwts.builder().setSubject(username).claim("roles", "user").setIssuedAt(issuedAt)
+        return Jwts.builder().setSubject(username).claim("roles", "user").setIssuedAt(issuedAt)
                               .signWith(SignatureAlgorithm.HS256, "secretkey").setExpiration(expireAt).compact();
-
-        return jwtToken;
     }
 
 }
