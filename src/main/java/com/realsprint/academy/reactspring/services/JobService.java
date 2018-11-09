@@ -46,6 +46,10 @@ public class JobService {
         return convertJobs(results);
     }
 
+    public Job findById(String id){
+        return convertJobEntity(jobRepository.findByGitId(id));
+    }
+
     private Job convertJobEntity(JobEntity jobEntity){
         return new Job(jobEntity.getGitId(), jobEntity.getLocation(), jobEntity.getTitle(), jobEntity.getCreatedAt(),
                 jobEntity.getType(), jobEntity.getDescription(), jobEntity.getHowToApply(), jobEntity.getCompany(),
