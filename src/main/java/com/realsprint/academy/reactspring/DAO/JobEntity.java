@@ -25,7 +25,8 @@ public class JobEntity {
     private String createdAt;
     @Column(nullable = false)
     private String type;
-    @Column(length = 8000)
+    @Lob
+    @Column(length = 15000)
     private String description;
     @Column(length = 1000)
     private String howToApply;
