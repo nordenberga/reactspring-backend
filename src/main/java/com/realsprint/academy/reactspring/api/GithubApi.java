@@ -1,18 +1,14 @@
 package com.realsprint.academy.reactspring.api;
 
-import com.realsprint.academy.reactspring.models.Job;
+import com.realsprint.academy.reactspring.DAO.JobEntity;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 import java.util.stream.Collectors;
 
 @Service
@@ -20,7 +16,7 @@ public class GithubApi {
 
     private static final String SEARCH_URL = "https://jobs.github.com/positions.json?search=";
 
-    public List<Job> searchForJobs(String query) {
+    public List<JobEntity> searchForJobs(String query) {
         RestTemplate template = new RestTemplate();
         String url = SEARCH_URL + query;
         ResponseEntity<List<GitHubJob>> responseEntity = template.exchange(url, HttpMethod.GET, null,
@@ -30,19 +26,22 @@ public class GithubApi {
 
 
         if (gitHubJobs != null && !gitHubJobs.isEmpty()) {
-            return parseResponse(gitHubJobs);
+            return convertJobs(gitHubJobs);
         }
         return new ArrayList<>();
     }
 
-    private List<Job> parseResponse(List<GitHubJob> gitHubJobs) {
-        return gitHubJobs.stream()
-                         .filter(Objects::nonNull)
-                         .map(this::parseGitHubJob)
-                         .collect(Collectors.toList());
+    private List<JobEntity> convertJobs(List<GitHubJob> gitHubJobs){
+        return gitHubJobs.stream().map(this::convertJob).collect(Collectors.toList());
     }
 
-    private Job parseGitHubJob(GitHubJob gitHubJob) {
-        return new Job(gitHubJob.getId(), gitHubJob.getLocation(), gitHubJob.getTitle());
+    private JobEntity convertJob(GitHubJob gitHubJob){
+        return new JobEntity(gitHubJob.getLocation(), gitHubJob.getTitle(), gitHubJob.getId(), gitHubJob.getCompany(),
+                gitHubJob.getCompanyUrl(), gitHubJob.getUrl(), gitHubJob.getCreatedAt(), gitHubJob.getType(),
+                gitHubJob.getDescription(), gitHubJob.getHowToApply(), gitHubJob.getCompanyLogo());
     }
+
+
+
+
 }
