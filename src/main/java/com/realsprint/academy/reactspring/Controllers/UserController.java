@@ -3,14 +3,16 @@ package com.realsprint.academy.reactspring.Controllers;
 import com.realsprint.academy.reactspring.DAO.UserEntity;
 import com.realsprint.academy.reactspring.models.User;
 import com.realsprint.academy.reactspring.services.UserService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/users")
@@ -30,16 +32,17 @@ public class UserController {
 
 
     @RequestMapping(value = "/adduser", method = {RequestMethod.POST})
-    public ResponseEntity<User> update(@RequestBody User user) {
+    public ResponseEntity<String> update(@RequestBody User user) {
         boolean userAdded = false;
         if (user != null) {
             userAdded = userService.addUser(user);
         }
 
         if(userAdded){
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            String token = getToken(user.getUsername());
+            return new ResponseEntity<>(token, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("failed to add user", HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -48,6 +51,16 @@ public class UserController {
     public UserEntity getUserByName(@PathVariable("name") String username) {
         return userService.findUserByName(username);
 
+    }
+
+    private String getToken(String username){
+        Date issuedAt = new Date();
+        Date expireAt = new Date(issuedAt.getTime() + TimeUnit.DAYS.toMillis(1));
+
+        String jwtToken = Jwts.builder().setSubject(username).claim("roles", "user").setIssuedAt(issuedAt)
+                              .signWith(SignatureAlgorithm.HS256, "secretkey").setExpiration(expireAt).compact();
+
+        return jwtToken;
     }
 
 }
