@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import './App.css'
 import FeaturedJobSingle from "./FeaturedJobSingle";
 import PropTypes from "prop-types";
+import JobView from "./JobView";
 
 class LoggedInLandingPage extends Component {
     state = {
@@ -28,7 +29,7 @@ class LoggedInLandingPage extends Component {
     }
 
     renderFeaturedJobs = () => {
-        return (this.state.featuredJobs.map(job => <FeaturedJobSingle title={job['title']} description={job['location']}/>));
+        return (this.state.featuredJobs.map(job => <JobView key={job.gitId} job={job} title={job['title']} description={job['location']}/>));
     };
 
 
@@ -74,7 +75,8 @@ class LoggedInLandingPage extends Component {
                         this.searchJobs();
                     }}}/><button onClick={this.searchJobs}>Sök</button>
                     {this.state.searchedJobs.map(function(job) {
-   return <li key={job.id}>{job.title} in {job.location}</li>
+   return <div key={job.gitid}>
+            <JobView job={job} visible={true}/></div>
    
 })}
                 </div>
