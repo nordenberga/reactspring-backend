@@ -1,6 +1,7 @@
 package com.realsprint.academy.reactspring.Controllers;
 
 import com.realsprint.academy.reactspring.DAO.UserEntity;
+import com.realsprint.academy.reactspring.models.LoginResponse;
 import com.realsprint.academy.reactspring.models.User;
 import com.realsprint.academy.reactspring.services.UserService;
 import io.jsonwebtoken.Jwts;
@@ -30,9 +31,8 @@ public class UserController {
         return userService.findAllUsers();
     }
 
-
     @RequestMapping(value = "/adduser", method = {RequestMethod.POST})
-    public ResponseEntity<String> update(@RequestBody User user) {
+    public LoginResponse update(@RequestBody User user) {
         boolean userAdded = false;
         if (user != null) {
             userAdded = userService.addUser(user);
@@ -40,9 +40,9 @@ public class UserController {
 
         if(userAdded){
             String token = getToken(user.getUsername());
-            return new ResponseEntity<>(token, HttpStatus.OK);
+            return new LoginResponse(true, token);
         } else {
-            return new ResponseEntity<>("failed to add user", HttpStatus.BAD_REQUEST);
+            return new LoginResponse(false, "");
         }
 
     }
