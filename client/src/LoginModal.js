@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import './App.css'
 import PropTypes from "prop-types";
+import {Redirect} from 'react-router-dom';
 
 class LoginModal extends Component {
     static propTypes = {
@@ -12,27 +13,39 @@ class LoginModal extends Component {
         userNameInput: "",
         passwordInput: "",
         errorEncountered: false,
-        data: []
+        data: [],
+        userLoginSuccessful: false
+
     };
 
-    attemptLogin = () => {
-        fetch('http://localhost:8080/login', {
-            method: 'post',
-            headers: {'Content-Type':'application/json'},
-            body:JSON.stringify( {
-                "username":this.state.userNameInput,
-                "password": this.state.passwordInput,   
-            })})
-            .then(response => 
-                response.json().then(data => ({
-                    data: data,
-                    status: response.status
-                })
-            ).then(res => {
-
-                 console.log(res.data)
-            }));
+   
+     attemptLogin = () => {
+            fetch('http://localhost:8080/login', {
+                method: 'post',
+                headers: {'Content-Type':'application/json'},
+                body:JSON.stringify( {
+                    "username":this.state.userNameInput,
+                    "password": this.state.passwordInput,   
+                })})
+                .then(response => 
+                    response.json().then(data => ({
+                        data: data,
+                        status: response.status
+                    })
+                ).then(res => {
+                     console.log(res.data);
+                     if (res.data['success'] === true) {
+                         this.setState({userLoginSuccessful: true});
+                         window.localStorage.setItem('token_jobs', res.data['message']);
+                         window.localStorage.setItem('username_jobs', this.state.userNameInput)
+                     }
+                     else {
+                         this.setState({errorEncountered: true});
+                         document.getElementById('passInput').value = "";
+                     }
+                }));
     };
+  
 
 
     handleUsernameWriter = (event) => {
@@ -46,6 +59,7 @@ class LoginModal extends Component {
     render () {
         return (
             <Fragment>
+                {this.state.userLoginSuccessful && <Redirect to="/welcome"/>}
                 {this.props.isOpen && <Fragment><div className="darkenedBackground"></div>
                 <div className="loginModal">
                     <h3>Logga In</h3>
