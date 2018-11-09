@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import './App.css'
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
+import {Redirect} from 'react-router-dom';
 
 class LoginModal extends Component {
     static propTypes = {
@@ -12,6 +13,7 @@ class LoginModal extends Component {
         userNameInput: "",
         passwordInput: "",
         errorEncountered: false,
+        userLoginSuccessful: false,
         data: []
     };
 
@@ -29,8 +31,16 @@ class LoginModal extends Component {
                     status: response.status
                 })
             ).then(res => {
-
-                 console.log(res.data)
+                 console.log(res.data);
+                 if (res.data['success'] === true) {
+                     this.setState({userLoginSuccessful: true});
+                     window.localStorage.setItem('token_jobs', res.data['message']);
+                     window.localStorage.setItem('username_jobs', this.state.userNameInput)
+                 }
+                 else {
+                     this.setState({errorEncountered: true});
+                     document.getElementById('passInput').value = "";
+                 }
             }));
     };
 
@@ -46,15 +56,16 @@ class LoginModal extends Component {
     render () {
         return (
             <Fragment>
+                {this.state.userLoginSuccessful && <Redirect to="/welcome"/>}
                 {this.props.isOpen && <Fragment><div className="darkenedBackground"></div>
                 <div className="loginModal">
                     <h3>Logga In</h3>
                     <hr/>
-                    {this.state.errorEncountered && <div>Login misslyckades</div>}
                     <span className="MainLoginSpan">
                         <p>Användarnamn:</p><input type="text" className="loginput" id="nameInput" onChange={this.handleUsernameWriter}/><br/>
                         <p>Lösenord:</p><input type="password" className="loginput" id="passInput" onChange={this.handlePasswordWriter}/><br/>
                         <button className="loginModalButton" onClick={this.attemptLogin}>Logga In</button><button className="abortModalButton" onClick={this.props.onClose}>Avbryt</button>
+                        {this.state.errorEncountered && <div className="errorText">Login misslyckades</div>}
                     </span>
                 </div></Fragment> }
             </Fragment>

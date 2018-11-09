@@ -1,14 +1,13 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import './App.css'
 import FeaturedJobSingle from "./FeaturedJobSingle";
-import PropTypes from "prop-types";
 
 class LoggedInLandingPage extends Component {
     state = {
-        username: "placeholder",
         searchText: "",
         searchedJobs: [],
-        featuredJobs: []
+        featuredJobs: [],
+        userNameToRender: "Gäst"
     };
 
 
@@ -25,6 +24,10 @@ class LoggedInLandingPage extends Component {
             ).then(res => {
                 this.setState({featuredJobs: res.data})
             }));
+        
+        if(localStorage.getItem("username_jobs")){
+            this.setState({userNameToRender: localStorage.getItem("username_jobs")})
+        }
     }
 
     renderFeaturedJobs = () => {
@@ -34,7 +37,7 @@ class LoggedInLandingPage extends Component {
 
     changeSearchString = (event) => {
         this.setState({searchText: event.target.value})
-    }
+    };
 
     searchJobs = () => {
         fetch('http://localhost:8080/search/' + this.state.searchText, {
@@ -49,19 +52,18 @@ class LoggedInLandingPage extends Component {
             ).then(res => {
                 this.setState({searchedJobs: res.data})
             }));
-    }
+    };
 
     handleKeyPress(target) {
-        if(target.charCode==13){
+        if(target.charCode===13){
             this.searchJobs()     
         }
-    
     }
 
     render() {
         return (
             <div className="landingDiv">
-                <h1>Välkommen {this.state.username}!</h1>
+                <h1>Välkommen {this.state.userNameToRender}!</h1>
                 <hr/>
                 <div className="featuredJobsDiv">
                     <b className="featuredJobsTitle">Utvalda jobb: </b>
