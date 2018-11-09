@@ -21,7 +21,7 @@ public class JobController {
     }*/
 
     @RequestMapping("/jobs")
-    public List<String> getAllJobs(){
+    public List<Job> getAllJobs(){
         return jobService.getAllJobs();
     }
 

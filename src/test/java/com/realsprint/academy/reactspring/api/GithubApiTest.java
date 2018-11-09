@@ -1,9 +1,8 @@
 package com.realsprint.academy.reactspring.api;
 
-import com.realsprint.academy.reactspring.models.Job;
+import com.realsprint.academy.reactspring.DAO.JobEntity;
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Test;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class GithubApiTest {
 
     @Ignore
     public void searchForJobs() {
-        List<Job> results = githubApi.searchForJobs("code");
+        List<JobEntity> results = githubApi.searchForJobs("code");
         assertFalse(results.isEmpty());
     }
 }
