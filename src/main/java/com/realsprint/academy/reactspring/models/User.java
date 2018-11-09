@@ -4,8 +4,6 @@ package com.realsprint.academy.reactspring.models;
 public class User {
 
 
-    private long id;
-
     private String username;
 
     private String password;
@@ -18,13 +16,6 @@ public class User {
         this.password = password;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

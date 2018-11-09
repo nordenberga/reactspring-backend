@@ -24,7 +24,11 @@ public class UserEntity {
         @Column(name = "password")
         private String password;
 
-       /* @OneToMany(mappedBy="id", cascade = CascadeType.ALL)
+        public UserEntity(@NotNull String username, @NotNull String password) {
+                this.username = username;
+                this.password = password;
+        }
+/* @OneToMany(mappedBy="id", cascade = CascadeType.ALL)
         private List<JobEntity> jobApplicationList;*/
     }
 

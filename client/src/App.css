@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  font-family: 'Asap', sans-serif;
+  background-color: #282c34;
 }
 
 .App-logo {
@@ -23,6 +25,8 @@
 
 body {
   font-family: 'Asap', sans-serif;
+  background-color: #282c34;
+  color: white;
 }
 
 .App-link {
@@ -84,7 +88,7 @@ body {
   font-size: 0.75em;
 }
 
-.loginModal button {
+button {
   margin: 5px;
   border-radius: 10px;
   background-color: darkgray;
@@ -98,11 +102,11 @@ body {
   background-color: green;
 }
 
-.loginModal input{
+ input{
   border-radius: 10px;
 }
 
-.loginModal input:focus{
+ input:focus{
   outline: 0 solid orange;
   box-shadow: 0 0 0 3pt orange;
   border: none;
@@ -123,11 +127,34 @@ body {
   width: 45%;
   display: inline-block;
   vertical-align: top;
-  border: 1px solid black;
+ 
   margin-left: 10px;
   margin-right: 2%;
+  padding: 10px;
 }
 
 .landingDiv {
   align-content: center;
+  margin-left:10%;
+  margin-right: 10%;
+}
+
+.searchJobsDiv li{
+  margin-top:3px;
+  margin-bottom:5px;
+ 
+}
+
+.searchJobsDiv button {
+  margin-left: 20px;
+  float: right;
+  width: 20%;
+}
+
+.searchJobsDiv input {
+  margin-left: 5%;
+  width: 45%;
+}
+.searchJobsDiv button:hover {
+ background-color: green;
 }
