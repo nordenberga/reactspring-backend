@@ -1,35 +1,50 @@
 package com.realsprint.academy.reactspring.DAO;
 
-
-import com.realsprint.academy.reactspring.models.Job;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 
 @Entity
 @Table(name = "user")
 public class UserEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private long id;
+    @NotNull
+    @Column(name = "username")
+    private String username;
 
-        @NotNull
-        @Column(name = "username")
-        private String username;
+    @NotNull
+    @Column(name = "password")
+    private String password;
 
-        @NotNull
-        @Column(name = "password")
-        private String password;
-
-        public UserEntity(@NotNull String username, @NotNull String password) {
-                this.username = username;
-                this.password = password;
-        }
-/* @OneToMany(mappedBy="id", cascade = CascadeType.ALL)
-        private List<JobEntity> jobApplicationList;*/
+    public UserEntity() {
     }
+
+    public String getUsername() {
+            return username;
+    }
+
+    public void setUsername(String username) {
+            this.username = username;
+    }
+
+    public String getPassword() {
+            return password;
+    }
+
+    public void setPassword(String password) {
+            this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+}
 
 

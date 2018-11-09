@@ -60,5 +60,4 @@ public class JobService {
         return jobs.stream().map(this::convertJobEntity).collect(Collectors.toList());
     }
 
-
 }
