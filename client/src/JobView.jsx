@@ -22,11 +22,11 @@ export default class JobView extends Component {
 
   render() {
     return (
-      <div className="jobview">
-        <h3 onClick={this.showExtraInfo} className="clickableHeader">{this.props.job.title} in {this.props.job.location}</h3>
+      <div className="jobview" onClick={this.showExtraInfo}>
+        <h3 className="clickableHeader">{this.props.job.title} in {this.props.job.location}</h3>
        {this.state.expandedInformation && <div className="Expanded"> 
            <h3>{this.props.job.type}</h3>
-           <div dangerouslySetInnerHTML={{__html: this.props.job.description}} onClick={this.showExtraInfo}></div>
+           <div dangerouslySetInnerHTML={{__html: this.props.job.description}}  className="jobdesc"></div>
         </div>
        }
       </div>

@@ -1,7 +1,5 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import './App.css'
-import FeaturedJobSingle from "./FeaturedJobSingle";
-import PropTypes from "prop-types";
 import JobView from "./JobView";
 
 class LoggedInLandingPage extends Component {
@@ -53,7 +51,7 @@ class LoggedInLandingPage extends Component {
     }
 
     handleKeyPress(target) {
-        if(target.charCode==13){
+        if(target.charCode===13){
             this.searchJobs()     
         }
     
@@ -62,7 +60,7 @@ class LoggedInLandingPage extends Component {
     render() {
         return (
             <div className="landingDiv">
-                <h1>Välkommen {this.state.username}!</h1>
+                <h1 className="centeredHeader">Välkommen {this.state.username}!</h1>
                 <hr/>
                 <div className="featuredJobsDiv">
                     <b className="featuredJobsTitle">Utvalda jobb: </b>
@@ -76,7 +74,7 @@ class LoggedInLandingPage extends Component {
                     }}}/><button onClick={this.searchJobs}>Sök</button>
                     {this.state.searchedJobs.map(function(job) {
    return <div key={job.gitid}>
-            <JobView job={job} visible={true}/></div>
+            <JobView key={job.gitid} job={job} visible={true}/></div>
    
 })}
                 </div>

@@ -106,6 +106,10 @@ button {
   border-radius: 10px;
 }
 
+.centeredHeader {
+  text-align: center;
+}
+
  input:focus{
   outline: 0 solid orange;
   box-shadow: 0 0 0 3pt orange;
@@ -121,6 +125,7 @@ button {
   display: inline-block;
   margin-left: 2%;
   margin-right: 10px;
+  margin-top:12px;
 }
 
 .searchJobsDiv {
@@ -160,20 +165,31 @@ button {
 }
 
 .landingDiv {
-  text-align: center;
+  
 }
 
-.clickableHeader:hover {
-  cursor: pointer;
-}
 
 .jobview {
   box-shadow: 0 4px 8px 0 whitesmoke;
   transition: 0.3s;
   padding: 5px;
-  margin-top:5px;
+  margin-top:10px;
 }
 
 .jobview:hover {
   box-shadow: 0 8px 16px 0 whitesmoke;
+  cursor: pointer;
+}
+
+.jobdesc a{
+  color: yellow;
+  text-decoration: none;
+}
+
+.jobdesc a:hover{
+  color:pink;
+}
+
+.featuredJobsTitle {
+  margin-top:20px;
 }
